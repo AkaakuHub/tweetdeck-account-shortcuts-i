@@ -1,7 +1,7 @@
 # TweetDeck Account Shortcuts
 
 i/tweetdeck版に対応したバージョンです<br/>
-ここからダウンロードするか、またはビルドしてください
+[ここ](https://github.com/AkaakuHub/tweetdeck-account-shortcuts-i/releases/tag/2.3.1)からダウンロードするか、またはビルドしてください
 
 Add keyboard shortcuts to quickly select account to tweet/retweet from in TweetDeck.
 
