@@ -3,6 +3,8 @@
 i/tweetdeck版に対応したバージョンです<br/>
 [ここ](https://github.com/AkaakuHub/tweetdeck-account-shortcuts-i/releases/tag/2.3.1)からダウンロードするか、またはビルドしてください
 
+----以下フォーク元のreadme----
+
 Add keyboard shortcuts to quickly select account to tweet/retweet from in TweetDeck.
 
 Get it via [Chrome Web Store](https://chrome.google.com/webstore/detail/tweetdeck-account-shortcu/jhclgjipjcengbapikaenmopdinlnpin).
