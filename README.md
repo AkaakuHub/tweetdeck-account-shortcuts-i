@@ -1,7 +1,7 @@
 # TweetDeck Account Shortcuts
 
 i/tweetdeck版に対応したバージョンです<br/>
-[ここ](https://github.com/AkaakuHub/tweetdeck-account-shortcuts-i/releases/tag/2.3.1)からダウンロードするか、またはビルドしてください
+[ここ](https://github.com/AkaakuHub/tweetdeck-account-shortcuts-i/releases)から最新版をダウンロードするか、またはビルドしてください
 
 ----以下フォーク元のreadme----
 
