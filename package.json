@@ -1,21 +1,24 @@
 {
-  "manifest_version": 2,
-  "name": "TweetDeck Account Shortcuts(compatible with i/tweetdeck)",
+  "name": "tweetdeck-account-shortcuts-i",
   "version": "3.0",
-  "description": "Add keyboard shortcuts to quickly select account to tweet from in TweetDeck",
-  "icons": {
-    "16": "icons/icon_16.png",
-    "128": "icons/icon_128.png"
+  "description": "Add keyboard shortcuts to quickly select account to tweet/retweet from in TweetDeck",
+  "private": true,
+  "devDependencies": {
+    "copy-webpack-plugin": "11.0.0",
+    "eslint": "8.31.0",
+    "eslint-config-prettier": "8.5.0",
+    "husky": "8.0.3",
+    "lint-staged": "13.1.0",
+    "prettier": "2.8.2",
+    "webpack": "5.75.0",
+    "webpack-cli": "5.0.1",
+    "zip-webpack-plugin": "4.0.1"
   },
-  "content_scripts": [
-    {
-      "matches": [
-        "https://twitter.com/i/tweetdeck"
-      ],
-      "run_at": "document_end",
-      "js": [
-        "contentScript.js"
-      ]
-    }
-  ]
+  "scripts": {
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.js": "eslint",
+    "*": "prettier --check"
+  }
 }
