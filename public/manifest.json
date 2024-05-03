@@ -9,16 +9,10 @@
   },
   "content_scripts": [
     {
-      "matches": [
-        "https://twitter.com/i/tweetdeck"
-      ],
+      "matches": ["https://twitter.com/i/tweetdeck"],
       "run_at": "document_end",
-      "js": [
-        "contentScript.js"
-      ],
-      "css": [
-        "style.css"
-      ]
+      "js": ["contentScript.js"],
+      "css": ["style.css"]
     }
   ]
 }

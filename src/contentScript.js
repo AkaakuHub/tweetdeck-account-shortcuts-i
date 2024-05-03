@@ -1,7 +1,7 @@
 "use strict"
 
-let lastSelectedAccountIndex = 0;
-let isFunctionEnabled = true;
+let lastSelectedAccountIndex = 0
+let isFunctionEnabled = true
 
 const setCookie = (key, value) => {
   document.cookie = `${key}=${value}; path=/; max-age=31536000 samesite=strict`
@@ -14,70 +14,73 @@ const getCookie = (key) => {
 }
 
 const changeLastSelectedAccountIndex = (index) => {
-  lastSelectedAccountIndex = index;
-  setCookie("lastSelectedAccountIndex", index);
+  lastSelectedAccountIndex = index
+  setCookie("lastSelectedAccountIndex", index)
 }
 
 const changeIsFunctionEnabled = (isEnabled) => {
-  isFunctionEnabled = isEnabled;
-  setCookie("isFunctionEnabled", isEnabled);
+  isFunctionEnabled = isEnabled
+  setCookie("isFunctionEnabled", isEnabled)
 }
 
 const setIndexByClickEvent = () => {
   // アカウントのアイコン画像をクリックした際の処理
-  const accountButtonCheckTimer = setInterval(accountButtonCheckIsReady, 50);
+  const accountButtonCheckTimer = setInterval(accountButtonCheckIsReady, 50)
   function accountButtonCheckIsReady() {
     if (document.querySelectorAll(".js-account-item").length !== 0) {
-      clearInterval(accountButtonCheckTimer);
+      clearInterval(accountButtonCheckTimer)
       const accountButtons = document.querySelectorAll(".js-account-item")
       accountButtons.forEach((button, index) => {
         button.addEventListener("click", () => {
-          changeLastSelectedAccountIndex(index);
-          setIndexByClickEvent();
-        });
-      });
+          changeLastSelectedAccountIndex(index)
+          setIndexByClickEvent()
+        })
+      })
     }
   }
 }
 
-const toggleButtonElement = document.createElement("button");
-toggleButtonElement.classList.add("tas_toggle_button");
+const toggleButtonElement = document.createElement("button")
+toggleButtonElement.classList.add("tas_toggle_button")
 
 // on/offボタンを追加
 const onClickToggleButton = () => {
   if (isFunctionEnabled) {
-    changeLastSelectedAccountIndex(0);
+    changeLastSelectedAccountIndex(0)
   }
-  changeIsFunctionEnabled(!isFunctionEnabled);
-  toggleButtonElement.textContent = isFunctionEnabled ? "保持する" : "保持しない";
+  changeIsFunctionEnabled(!isFunctionEnabled)
+  toggleButtonElement.textContent = isFunctionEnabled
+    ? "保持する"
+    : "保持しない"
 }
 
-toggleButtonElement.addEventListener("click", onClickToggleButton);
+toggleButtonElement.addEventListener("click", onClickToggleButton)
 
 const injectToggleButton = () => {
-  const addToggleButtonCheckTimer = setInterval(addToggleButtonCheckIsReady, 50);
+  const addToggleButtonCheckTimer = setInterval(addToggleButtonCheckIsReady, 50)
   function addToggleButtonCheckIsReady() {
     if (document.querySelector(".js-account-list") !== undefined) {
-      clearInterval(addToggleButtonCheckTimer);
+      clearInterval(addToggleButtonCheckTimer)
 
-      const targetElement = document.querySelector(".js-account-list");
+      const targetElement = document.querySelector(".js-account-list")
       // すでにある場合は追加しない
-      const isAlreadyExist = targetElement.nextElementSibling === toggleButtonElement;
-      if (isAlreadyExist) return;
+      const isAlreadyExist =
+        targetElement.nextElementSibling === toggleButtonElement
+      if (isAlreadyExist) return
 
-      toggleButtonElement.textContent = isFunctionEnabled ? "保持する" : "保持しない";
-      targetElement.insertAdjacentElement("afterend", toggleButtonElement);
+      toggleButtonElement.textContent = isFunctionEnabled
+        ? "保持する"
+        : "保持しない"
+      targetElement.insertAdjacentElement("afterend", toggleButtonElement)
     }
   }
 }
 
 const determineButtonToClick = (buttonElements, index) =>
-index < buttonElements.length ? buttonElements[index] : buttonElements[0]
+  index < buttonElements.length ? buttonElements[index] : buttonElements[0]
 
 const clickAccountInTheIndex = (index) => {
-  const buttons = Array.from(
-    document.getElementsByClassName("js-account-item")
-  )
+  const buttons = Array.from(document.getElementsByClassName("js-account-item"))
   if (!buttons.length) return
 
   const buttonToClick = determineButtonToClick(buttons, index)
@@ -114,12 +117,12 @@ const selectAccount = (index) => {
 
   if (!application.classList.contains("hide-detail-view-inline")) {
     drawerToggleButton.click()
-    setIndexByClickEvent();
-    injectToggleButton();
+    setIndexByClickEvent()
+    injectToggleButton()
   }
 
   clickAccountInTheIndex(index)
-  changeLastSelectedAccountIndex(index);
+  changeLastSelectedAccountIndex(index)
 }
 
 const quote = () =>
@@ -147,14 +150,14 @@ const isTyping = () => {
       if (!drawerToggleButton || !application) return
 
       if (!application.classList.contains("hide-detail-view-inline")) {
-        e.preventDefault();
+        e.preventDefault()
 
         drawerToggleButton.click()
-        injectToggleButton();
-        setIndexByClickEvent();
-        if (!isFunctionEnabled) return;
+        injectToggleButton()
+        setIndexByClickEvent()
+        if (!isFunctionEnabled) return
 
-        clickAccountInTheIndex(lastSelectedAccountIndex);
+        clickAccountInTheIndex(lastSelectedAccountIndex)
       }
     }
 
@@ -164,22 +167,26 @@ const isTyping = () => {
   }
 
   // ドローワーを開くボタンにイベントリスナーを追加
-  const drawerToggleButtonCheckTimer = setInterval(drawerToggleButtonCheckIsReady, 50);
+  const drawerToggleButtonCheckTimer = setInterval(
+    drawerToggleButtonCheckIsReady,
+    50
+  )
   function drawerToggleButtonCheckIsReady() {
     if (document.getElementsByClassName("js-show-drawer")[0] !== undefined) {
-      clearInterval(drawerToggleButtonCheckTimer);
-      const drawerToggleButton = document.getElementsByClassName("js-show-drawer")[0];
+      clearInterval(drawerToggleButtonCheckTimer)
+      const drawerToggleButton =
+        document.getElementsByClassName("js-show-drawer")[0]
       drawerToggleButton.addEventListener("click", () => {
-        injectToggleButton();
-        setIndexByClickEvent();
-        if (!isFunctionEnabled) return;
+        injectToggleButton()
+        setIndexByClickEvent()
+        if (!isFunctionEnabled) return
 
-        selectAccount(lastSelectedAccountIndex);
-      });
+        selectAccount(lastSelectedAccountIndex)
+      })
     }
   }
 
   // cookieからlastSelectedAccountIndex, isFunctionEnabledがあれば取得
-  lastSelectedAccountIndex = getCookie("lastSelectedAccountIndex") || 0;
-  isFunctionEnabled = getCookie("isFunctionEnabled") === "true" || true;
+  lastSelectedAccountIndex = getCookie("lastSelectedAccountIndex") || 0
+  isFunctionEnabled = getCookie("isFunctionEnabled") === "true" || true
 })()
