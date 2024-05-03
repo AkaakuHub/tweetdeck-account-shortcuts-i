@@ -155,7 +155,10 @@ const isTyping = () => {
         drawerToggleButton.click()
         injectToggleButton()
         setIndexByClickEvent()
-        if (!isFunctionEnabled) return
+        if (!isFunctionEnabled){
+          changeLastSelectedAccountIndex(0)
+          return
+        }
 
         clickAccountInTheIndex(lastSelectedAccountIndex)
       }
@@ -179,7 +182,10 @@ const isTyping = () => {
       drawerToggleButton.addEventListener("click", () => {
         injectToggleButton()
         setIndexByClickEvent()
-        if (!isFunctionEnabled) return
+        if (!isFunctionEnabled){
+          changeLastSelectedAccountIndex(0)
+          return
+        }
 
         selectAccount(lastSelectedAccountIndex)
       })
