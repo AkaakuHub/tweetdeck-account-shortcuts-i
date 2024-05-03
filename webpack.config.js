@@ -34,6 +34,10 @@ const config = {
           from: "**/*",
           context: "public",
         },
+        {
+          from: "src/style.css",
+          to: "style.css",
+        }
       ],
     }),
     ...(nodeEnv === "production"

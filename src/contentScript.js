@@ -1,6 +1,27 @@
 "use strict"
 
 let lastSelectedAccountIndex = 0;
+let isFunctionEnabled = true;
+
+const setCookie = (key, value) => {
+  document.cookie = `${key}=${value}; path=/; max-age=31536000 samesite=strict`
+}
+
+const getCookie = (key) => {
+  const cookies = document.cookie.split(";")
+  const cookie = cookies.find((cookie) => cookie.includes(key))
+  return cookie ? cookie.split("=")[1] : null
+}
+
+const changeLastSelectedAccountIndex = (index) => {
+  lastSelectedAccountIndex = index;
+  setCookie("lastSelectedAccountIndex", index);
+}
+
+const changeIsFunctionEnabled = (isEnabled) => {
+  isFunctionEnabled = isEnabled;
+  setCookie("isFunctionEnabled", isEnabled);
+}
 
 const setIndexByClickEvent = () => {
   // アカウントのアイコン画像をクリックした際の処理
@@ -11,9 +32,41 @@ const setIndexByClickEvent = () => {
       const accountButtons = document.querySelectorAll(".js-account-item")
       accountButtons.forEach((button, index) => {
         button.addEventListener("click", () => {
-          lastSelectedAccountIndex = index;
+          changeLastSelectedAccountIndex(index);
+          setIndexByClickEvent();
         });
       });
+    }
+  }
+}
+
+const toggleButtonElement = document.createElement("button");
+toggleButtonElement.classList.add("tas_toggle_button");
+
+// on/offボタンを追加
+const onClickToggleButton = () => {
+  if (isFunctionEnabled) {
+    changeLastSelectedAccountIndex(0);
+  }
+  changeIsFunctionEnabled(!isFunctionEnabled);
+  toggleButtonElement.textContent = isFunctionEnabled ? "保持する" : "保持しない";
+}
+
+toggleButtonElement.addEventListener("click", onClickToggleButton);
+
+const injectToggleButton = () => {
+  const addToggleButtonCheckTimer = setInterval(addToggleButtonCheckIsReady, 50);
+  function addToggleButtonCheckIsReady() {
+    if (document.querySelector(".js-account-list") !== undefined) {
+      clearInterval(addToggleButtonCheckTimer);
+
+      const targetElement = document.querySelector(".js-account-list");
+      // すでにある場合は追加しない
+      const isAlreadyExist = targetElement.nextElementSibling === toggleButtonElement;
+      if (isAlreadyExist) return;
+
+      toggleButtonElement.textContent = isFunctionEnabled ? "保持する" : "保持しない";
+      targetElement.insertAdjacentElement("afterend", toggleButtonElement);
     }
   }
 }
@@ -62,10 +115,11 @@ const selectAccount = (index) => {
   if (!application.classList.contains("hide-detail-view-inline")) {
     drawerToggleButton.click()
     setIndexByClickEvent();
+    injectToggleButton();
   }
 
   clickAccountInTheIndex(index)
-  lastSelectedAccountIndex = index;
+  changeLastSelectedAccountIndex(index);
 }
 
 const quote = () =>
@@ -96,7 +150,10 @@ const isTyping = () => {
         e.preventDefault();
 
         drawerToggleButton.click()
+        injectToggleButton();
         setIndexByClickEvent();
+        if (!isFunctionEnabled) return;
+
         clickAccountInTheIndex(lastSelectedAccountIndex);
       }
     }
@@ -113,9 +170,16 @@ const isTyping = () => {
       clearInterval(drawerToggleButtonCheckTimer);
       const drawerToggleButton = document.getElementsByClassName("js-show-drawer")[0];
       drawerToggleButton.addEventListener("click", () => {
+        injectToggleButton();
         setIndexByClickEvent();
+        if (!isFunctionEnabled) return;
+
         selectAccount(lastSelectedAccountIndex);
       });
     }
   }
+
+  // cookieからlastSelectedAccountIndex, isFunctionEnabledがあれば取得
+  lastSelectedAccountIndex = getCookie("lastSelectedAccountIndex") || 0;
+  isFunctionEnabled = getCookie("isFunctionEnabled") === "true" || true;
 })()
