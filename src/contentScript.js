@@ -187,6 +187,10 @@ const isTyping = () => {
   }
 
   // cookieからlastSelectedAccountIndex, isFunctionEnabledがあれば取得
-  lastSelectedAccountIndex = getCookie("lastSelectedAccountIndex") || 0
-  isFunctionEnabled = getCookie("isFunctionEnabled") === "true" || true
+  if (getCookie("lastSelectedAccountIndex") !== null) {
+    lastSelectedAccountIndex = Number(getCookie("lastSelectedAccountIndex"))
+  }
+  if (getCookie("isFunctionEnabled") !== null) {
+    isFunctionEnabled = getCookie("isFunctionEnabled") === "true"
+  }
 })()
