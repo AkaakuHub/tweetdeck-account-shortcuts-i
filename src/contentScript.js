@@ -192,7 +192,7 @@ const isTyping = () => {
     }
   }
 
-  // cookieからlastSelectedAccountIndex, isFunctionEnabledがあれば取得
+  // cookieから、lastSelectedAccountIndex, isFunctionEnabledがあれば取得
   if (getCookie("lastSelectedAccountIndex") !== null) {
     lastSelectedAccountIndex = Number(getCookie("lastSelectedAccountIndex"))
   }
