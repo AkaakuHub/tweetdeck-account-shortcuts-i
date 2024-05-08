@@ -2,7 +2,7 @@
 
 Add keyboard shortcuts to quickly select account to tweet/retweet from in TweetDeck.
 
-Releaseの最新版を使ってください！
+## [Release](https://github.com/AkaakuHub/tweetdeck-account-shortcuts-i/releases)の最新版を使ってください！
 
 ## Contribution
 
