@@ -2,7 +2,7 @@
 
 Add keyboard shortcuts to quickly select account to tweet/retweet from in TweetDeck.
 
-Get it via [Chrome Web Store](https://chrome.google.com/webstore/detail/tweetdeck-account-shortcu/jhclgjipjcengbapikaenmopdinlnpin).
+## [Release](https://github.com/AkaakuHub/tweetdeck-account-shortcuts-i/releases)の最新版を使ってください！
 
 ## Contribution
 
