@@ -59,7 +59,9 @@ toggleButtonElement.addEventListener("click", onClickToggleButton)
 const injectToggleButton = () => {
   const addToggleButtonCheckTimer = setInterval(addToggleButtonCheckIsReady, 50)
   function addToggleButtonCheckIsReady() {
+    console.log("ready__3")
     if (document.querySelector(".js-account-list") !== undefined) {
+    console.log("ok__3")
       clearInterval(addToggleButtonCheckTimer)
 
       const targetElement = document.querySelector(".js-account-list")
@@ -175,7 +177,9 @@ const isTyping = () => {
     50
   )
   function drawerToggleButtonCheckIsReady() {
+    console.log("ready__1")
     if (document.getElementsByClassName("js-show-drawer")[0] !== undefined) {
+      console.log("ok__1")
       clearInterval(drawerToggleButtonCheckTimer)
       const drawerToggleButton =
         document.getElementsByClassName("js-show-drawer")[0]
@@ -189,6 +193,31 @@ const isTyping = () => {
 
         selectAccount(lastSelectedAccountIndex)
       })
+    }
+  }
+
+
+  // ページを開いたときにドローワーが表示されていたら、ボタンとイベントリスナーを追加
+  const drawerAlreadyShownCheckTimer = setInterval(
+    drawerAlreadyShownCheckIsReady,
+    50
+  )
+  function drawerAlreadyShownCheckIsReady() {
+    console.log("ready__2")
+    const application = document.getElementsByClassName("application")[0]
+    if (!application) return
+
+    if (!application.classList.contains("hide-detail-view-inline")) {
+      console.log("ok__2")
+      clearInterval(drawerAlreadyShownCheckTimer)
+
+      injectToggleButton()
+      setIndexByClickEvent()
+      if (!isFunctionEnabled){
+        changeLastSelectedAccountIndex(0)
+        return
+      }
+      selectAccount(lastSelectedAccountIndex)
     }
   }
 
