@@ -59,9 +59,9 @@ toggleButtonElement.addEventListener("click", onClickToggleButton)
 const injectToggleButton = () => {
   const addToggleButtonCheckTimer = setInterval(addToggleButtonCheckIsReady, 50)
   function addToggleButtonCheckIsReady() {
-    console.log("ready__3")
+    // console.log("ready__3")
     if (document.querySelector(".js-account-list") !== undefined) {
-    console.log("ok__3")
+    // console.log("ok__3")
       clearInterval(addToggleButtonCheckTimer)
 
       const targetElement = document.querySelector(".js-account-list")
@@ -127,8 +127,8 @@ const selectAccount = (index) => {
   changeLastSelectedAccountIndex(index)
 }
 
-const quote = () =>
-  document.querySelector('button[data-action="quote"]')?.click()
+// const quote = () =>
+//   document.querySelector('button[data-action="quote"]')?.click()
 
 const isTyping = () => {
   const inputTags = ["INPUT", "TEXTAREA", "SELECT"]
@@ -138,7 +138,8 @@ const isTyping = () => {
 
 ;(() => {
   document.onkeydown = (e) => {
-    if (!isTyping() && e.shiftKey && e.code.includes("Digit")) {
+    if (e.altKey && e.code.includes("Digit")) {
+    // if (!isTyping() && e.shiftKey && e.code.includes("Digit")) {
       e.preventDefault()
       const numKeyIndex = e.code.slice(-1)
       numKeyIndex > 0 ? selectAccount(numKeyIndex - 1) : selectAccount(9)
@@ -166,9 +167,9 @@ const isTyping = () => {
       }
     }
 
-    if (!isTyping() && e.altKey && e.key === "Enter") {
-      quote()
-    }
+    // if (!isTyping() && e.altKey && e.key === "Enter") {
+    //   quote()
+    // }
   }
 
   // ドローワーを開くボタンにイベントリスナーを追加
@@ -177,9 +178,9 @@ const isTyping = () => {
     50
   )
   function drawerToggleButtonCheckIsReady() {
-    console.log("ready__1")
+    // console.log("ready__1")
     if (document.getElementsByClassName("js-show-drawer")[0] !== undefined) {
-      console.log("ok__1")
+      // console.log("ok__1")
       clearInterval(drawerToggleButtonCheckTimer)
       const drawerToggleButton =
         document.getElementsByClassName("js-show-drawer")[0]
@@ -203,12 +204,12 @@ const isTyping = () => {
     50
   )
   function drawerAlreadyShownCheckIsReady() {
-    console.log("ready__2")
+    // console.log("ready__2")
     const application = document.getElementsByClassName("application")[0]
     if (!application) return
 
     if (!application.classList.contains("hide-detail-view-inline")) {
-      console.log("ok__2")
+      // console.log("ok__2")
       clearInterval(drawerAlreadyShownCheckTimer)
 
       injectToggleButton()
