@@ -1,17 +1,22 @@
 .tas_toggle_button {
   bottom: 10px !important;
-  width: 6em !important;
+  width: 7em !important;
   right: 10px !important;
   z-index: 1000 !important;
-  padding: 5px !important;
+  padding: 7px !important;
   margin-left: 10px !important;
-  border: none !important;
-  border-radius: 5px !important;
-  background: white !important;
-  color: black !important;
+  border: 3px solid #ffffff00 !important;
+  border-radius: 24px !important;
+  background: #6b7d8c !important;
+  color: #fff !important;
   cursor: pointer !important;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;
+
   &:hover {
-    filter: brightness(0.8) !important;
+    background: #8899A6 !important;
+  }
+
+  &:active {
+    border: 3px solid #1da1f2 !important;
   }
 }
