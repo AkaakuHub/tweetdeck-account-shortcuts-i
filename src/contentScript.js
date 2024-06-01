@@ -49,9 +49,10 @@ const onClickToggleButton = () => {
     changeLastSelectedAccountIndex(0)
   }
   changeIsFunctionEnabled(!isFunctionEnabled)
-  toggleButtonElement.textContent = isFunctionEnabled
-    ? "保持する"
-    : "保持しない"
+  let textContent = "アカウントの選択を"
+  textContent += isFunctionEnabled ? "保持する" : "保持しない"
+
+  toggleButtonElement.textContent = textContent
 }
 
 toggleButtonElement.addEventListener("click", onClickToggleButton)
@@ -64,15 +65,16 @@ const injectToggleButton = () => {
     // console.log("ok__3")
       clearInterval(addToggleButtonCheckTimer)
 
-      const targetElement = document.querySelector(".js-account-list")
+      const targetElement = document.querySelector("#injected-body > div.application.js-app.is-condensed.hide-detail-view-inline > div.js-app-content.app-content.is-open > div:nth-child(1) > div > div > div > div > div > div.js-tweet-type-button")
       // すでにある場合は追加しない
       const isAlreadyExist =
         targetElement.nextElementSibling === toggleButtonElement
       if (isAlreadyExist) return
 
-      toggleButtonElement.textContent = isFunctionEnabled
-        ? "保持する"
-        : "保持しない"
+      let textContent = "アカウントの選択を"
+      textContent += isFunctionEnabled ? "保持する" : "保持しない"
+
+      toggleButtonElement.textContent = textContent
       targetElement.insertAdjacentElement("afterend", toggleButtonElement)
     }
   }
