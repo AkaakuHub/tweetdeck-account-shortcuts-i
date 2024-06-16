@@ -140,6 +140,10 @@ const isTyping = () => {
 
 ;(() => {
   document.onkeydown = (e) => {
+    // alt + ctrlで、保持機能を切り替える
+    if (e.altKey && e.ctrlKey) {
+      onClickToggleButton()
+    }
     if (e.altKey && e.code.includes("Digit")) {
     // if (!isTyping() && e.shiftKey && e.code.includes("Digit")) {
       e.preventDefault()
